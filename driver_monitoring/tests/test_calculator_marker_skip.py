@@ -1,0 +1,47 @@
+import sys
+import pytest
+from driver_monitoring.calculator import Calculator
+
+# Using Parametrize test
+calc = Calculator()
+@pytest.mark.skip(reason="Simply")
+@pytest.mark.parametrize("x, y, expected", [
+    (2, 4, 6),
+    (-1, 5, 4),
+    (0, 0, 0),
+])
+def test_add(x, y, expected):
+    assert calc.add(x, y) == expected
+
+@pytest.mark.xfail(reason="10 - 5 = 5 not 6")
+@pytest.mark.parametrize("x, y, expected", [
+    (2, 4, -2),
+    (10, 5, 6),
+    (0, 0, 0),
+])
+def test_subtract(x, y, expected):
+    assert calc.subtract(x, y) == expected
+
+@pytest.mark.skipif(sys.platform == "Win32", reason="Does not match")
+@pytest.mark.parametrize("x, y, expected", [
+    (2, 5, 10),
+    (-3, 3, -9),
+    (0, 100, 0),
+])
+def test_multiply(x, y, expected):
+    assert calc.multiply(x, y) == expected
+  
+@pytest.mark.parametrize("x, y, expected", [
+    (10, 2, 5),
+    (9, 3, 3),
+    (5, 2, 2.5),
+])
+def test_divide(x, y, expected):
+    assert calc.divide(x, y) == expected
+
+@pytest.mark.parametrize("x, y, expected", [
+    (10, 0, "Error! Division by zero."),
+    (0, 0, "Error! Division by zero."),
+])
+def test_divide_by_zero(x, y, expected):
+    assert calc.divide(x, y) == expected

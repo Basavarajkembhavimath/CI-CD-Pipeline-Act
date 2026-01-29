@@ -26,4 +26,5 @@ jobs:
 
     - name: Run pytest
       run: |
+        pytest -v
         pytest driver_monitoring/tests -n auto --disable-warnings -q

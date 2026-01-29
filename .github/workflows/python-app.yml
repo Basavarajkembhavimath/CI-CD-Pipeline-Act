@@ -32,4 +32,11 @@ jobs:
     - name: Run pytest with coverage
       run: | 
         pytest driver_monitoring/tests --cov=driver_monitoring --cov-report=xml
+    - name: Run Coverage Reports
+      run: |
+        pytest --cov=driver_monitoring --cov-report=term-missing
+        pytest --cov=driver_monitoring --cov-report=html
+
+
+    
 
